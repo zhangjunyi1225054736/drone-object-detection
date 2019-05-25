@@ -216,7 +216,7 @@ DATASETS = {
         IM_DIR:
             _DATA_DIR + '/VOC2007/JPEGImages',
         ANN_FN:
-            _DATA_DIR + '/VOC2007/cocoformatJson_zjy/voc_2007_test.json',
+            _DATA_DIR + '/VOC2007/cocoformatJson/voc_2007_test.json',
         DEVKIT_DIR:
             _DATA_DIR + '/VOC2007/VOCdevkit2007'
     },

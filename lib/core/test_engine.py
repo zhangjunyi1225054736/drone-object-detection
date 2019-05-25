@@ -254,7 +254,7 @@ def test_net(
             box_proposals = None
 
         im = cv2.imread(entry['image'])
-        cls_boxes_i, cls_segms_i, cls_keyps_i = im_detect_all(model, im, box_proposals, timers)
+        cls_boxes_i, cls_segms_i, cls_keyps_i = im_detect_all(model, im, box_proposals, timers, entry['image'][-27:])
 
         extend_results(i, all_boxes, cls_boxes_i)
         if cls_segms_i is not None:
@@ -390,7 +390,6 @@ def empty_results(num_classes, num_images):
     all_segms = [[[] for _ in range(num_images)] for _ in range(num_classes)]
     all_keyps = [[[] for _ in range(num_images)] for _ in range(num_classes)]
     return all_boxes, all_segms, all_keyps
-
 
 def extend_results(index, all_res, im_res):
     """Add results for an image to the set of all results at the specified

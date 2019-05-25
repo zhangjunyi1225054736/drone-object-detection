@@ -46,10 +46,8 @@ import utils.fpn as fpn_utils
 import utils.image as image_utils
 import utils.keypoints as keypoint_utils
 from numpy import random
-import json
-def im_detect_all(model, im,  box_proposals=None, timers=None, filename=None):
 
-
+def im_detect_all(model, im, box_proposals=None, timers=None):
     """Process the outputs of model for testing
     Args:
       model: the network module
@@ -67,7 +65,7 @@ def im_detect_all(model, im,  box_proposals=None, timers=None, filename=None):
     timers['im_detect_bbox'].tic()
     if cfg.TEST.BBOX_AUG.ENABLED:
         scores, boxes, im_scale, blob_conv = im_detect_bbox_aug(
-            model, im, box_proposals,filename)
+            model, im, box_proposals)
     else:
         scores, boxes, im_scale, blob_conv = im_detect_bbox(
             model, im, cfg.TEST.SCALE, cfg.TEST.MAX_SIZE, box_proposals)
@@ -225,7 +223,7 @@ def im_detect_bbox(model, im, target_scale, target_max_size, boxes=None, region_
     return scores, pred_boxes, im_scale, return_dict['blob_conv']
 
 
-def im_detect_bbox_aug(model, im, box_proposals=None, filename = None):
+def im_detect_bbox_aug(model, im, box_proposals=None):
     #print("im shape:",im.shape)
     """Performs bbox detection with test-time augmentations.
     Function signature is the same as for im_detect_bbox.
@@ -278,33 +276,22 @@ def im_detect_bbox_aug(model, im, box_proposals=None, filename = None):
           Difficult_regions[1] = [int(w/2), 1, w-1, int(h/2)]
           Difficult_regions[2] = [1, int(h/2), int(w/2), h-1]
           Difficult_regions[3] = [int(w/2), int(h/2), w-1, h-1]
-       elif cfg.TEST.BBOX_AUG.TRAINED_CROP:
-          Difficult_regions = get_trainedCropRegion(filename)
-
+       else:
+          Difficult_regions = get_trainedCropRegion(w,h)
        i = 0
        max_size = cfg.TEST.BBOX_AUG.MAX_SIZE
 
        for region_box in Difficult_regions:
-           #for j in range(4):
-               #region_box[i] = int(region_box[i])
-           y1 = int(region_box[1]) 
-           y2 = int(region_box[3]) 
-           x1 = int(region_box[0])
-           x2 = int(region_box[2])
+           y1 = region_box[1]
+           y2 = region_box[3]
+           x1 = region_box[0]
+           x2 = region_box[2]
            im_crop = im[y1:y2, x1:x2] #crop the image
-           #if(region_box[1]<0):
-           cv2.imwrite("./crop/"+str(i)+'_'+filename, im_crop)
-              # cv2.imwrite("./crop/or"+str(i)+".jpg", im)
+           #cv2.imwrite("./crop/"+str(i)+".jpg", im_crop)
            i = i + 1
            #print("im shape:",im.shape)
            #print("region_box:",region_box)
-           if cfg.TEST.BBOX_AUG.TRAINED_CROP:
-               #if im_crop.shape[0]/im_crop.shape[1]>4 or im_crop.shape[0]/im_crop.shape[1]<0.25:
-               #    continue
-               scale = min(im_crop.shape[0],im_crop.shape[1]) * 1.5
-               scores_scl, boxes_scl = im_detect_bbox_crop(model, im_crop, scale, max_size, box_proposals, region_box)
-           else:
-               scores_scl, boxes_scl = im_detect_bbox_crop(model, im_crop, cfg.TEST.SCALE, max_size, box_proposals, region_box)
+           scores_scl, boxes_scl = im_detect_bbox_crop(model, im_crop, cfg.TEST.SCALE, max_size, box_proposals, region_box)
            #print("boxes_scl:",boxes_scl)
            add_preds_t(scores_scl, boxes_scl)
 
@@ -314,7 +301,7 @@ def im_detect_bbox_aug(model, im, box_proposals=None, filename = None):
         scores_scl, boxes_scl = im_detect_bbox_scale(
             model, im, scale, max_size, box_proposals
         )
-        #add_preds_t(scores_scl, boxes_scl)
+        add_preds_t(scores_scl, boxes_scl)
 
         if cfg.TEST.BBOX_AUG.SCALE_H_FLIP:
             scores_scl_hf, boxes_scl_hf = im_detect_bbox_scale(
@@ -327,7 +314,7 @@ def im_detect_bbox_aug(model, im, box_proposals=None, filename = None):
         scores_ar, boxes_ar = im_detect_bbox_aspect_ratio(
             model, im, aspect_ratio, box_proposals
         )
-        add_preds_t(scores_ar, boxes_ar)
+        #add_preds_t(scores_ar, boxes_ar)
 
         if cfg.TEST.BBOX_AUG.ASPECT_RATIO_H_FLIP:
             scores_ar_hf, boxes_ar_hf = im_detect_bbox_aspect_ratio(
@@ -376,8 +363,8 @@ def get_randomCropRegion(width,height,crop_number=4):
     while 1:
         if count >= crop_number:
            break
-        w = random.uniform(0.9 * width, width)
-        h = random.uniform(0.2 * height, 0.25*height)
+        w = random.uniform(0.4 * width, 0.6*width)
+        h = random.uniform(0.3 * height, 0.6*height)
         #w = width - 10
         #h = height - 10
         if h / w < 0.5 or h / w > 2:
@@ -390,13 +377,8 @@ def get_randomCropRegion(width,height,crop_number=4):
         count = count + 1
     return region_box 
 
-def get_trainedCropRegion(filename):
-    with open('/mnt/md126/zhangjunyi/drone-object-detection/prop.json', 'r') as f:
-        data = json.load(f)
-    bbox = data['bbox']
-    name = data['img_name']
-    region_box = bbox[name.index(filename)]
-    return region_box
+def get_trainedCropRegion(width,height)
+   return []
 
 def im_detect_bbox_hflip(
         model, im, target_scale, target_max_size, box_proposals=None,region_box=None):

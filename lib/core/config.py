@@ -190,9 +190,10 @@ __C.TEST.MAX_SIZE = 1000
 
 # Overlap threshold used for non-maximum suppression (suppress boxes with
 # IoU >= this threshold)
-__C.TEST.NMS = 0.3
+__C.TEST.NMS = 0.5
 
 # Apply Fast R-CNN style bounding-box regression if True
+#changed
 __C.TEST.BBOX_REG = True
 
 # Test using these proposal files (must correspond with TEST.DATASETS)
@@ -261,6 +262,15 @@ __C.TEST.BBOX_AUG.COORD_HEUR = 'UNION'
 
 # Horizontal flip at the original scale (id transform)
 __C.TEST.BBOX_AUG.H_FLIP = False
+
+#detect at crop image
+__C.TEST.BBOX_AUG.CROP = True
+
+__C.TEST.BBOX_AUG.RANDOM_CROP = False
+
+__C.TEST.BBOX_AUG.NOR_CROP = False
+
+__C.TEST.BBOX_AUG.TRAINED_CROP = False
 
 # Each scale is the pixel size of an image's shortest side
 __C.TEST.BBOX_AUG.SCALES = ()
@@ -359,10 +369,10 @@ __C.TEST.KPS_AUG.ASPECT_RATIO_H_FLIP = False
 __C.TEST.SOFT_NMS = AttrDict()
 
 # Use soft NMS instead of standard NMS if set to True
-__C.TEST.SOFT_NMS.ENABLED = False
+__C.TEST.SOFT_NMS.ENABLED = True
 # See soft NMS paper for definition of these options
 __C.TEST.SOFT_NMS.METHOD = 'linear'
-__C.TEST.SOFT_NMS.SIGMA = 0.5
+__C.TEST.SOFT_NMS.SIGMA = 0.3
 # For the soft NMS overlap threshold, we simply use TEST.NMS
 
 # ---------------------------------------------------------------------------- #
