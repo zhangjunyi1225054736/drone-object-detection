@@ -259,7 +259,7 @@ def im_detect_bbox_aug(model, im, box_proposals=None, filename = None):
             cfg.TEST.MAX_SIZE,
             box_proposals=box_proposals
         )
-        #add_preds_t(scores_hf, boxes_hf)
+        add_preds_t(scores_hf, boxes_hf)
 
     # Perform detection on croped images
     if cfg.TEST.BBOX_AUG.CROP:
@@ -273,11 +273,27 @@ def im_detect_bbox_aug(model, im, box_proposals=None, filename = None):
           Difficult_regions = get_randomCropRegion(w,h,random_crop_number)
           #print("Difficult_regions:", Difficult_regions)
        elif cfg.TEST.BBOX_AUG.NOR_CROP:
+          '''
           Difficult_regions = [[] for i in range(4)]
           Difficult_regions[0] = [1, 1, int(w/2), int(h/2)]
           Difficult_regions[1] = [int(w/2), 1, w-1, int(h/2)]
           Difficult_regions[2] = [1, int(h/2), int(w/2), h-1]
           Difficult_regions[3] = [int(w/2), int(h/2), w-1, h-1]
+          '''
+          w_n = 4
+          h_n = 2
+
+          region_n = w_n * h_n
+          w_ = int(w / w_n) 
+          h_ = int(h / h_n) 
+
+          Difficult_regions = [[] for i in range(region_n)] 
+          for i in range(region_n):
+              j = int(i / h_n)
+              k = i - j*w_n
+              print("j,k",j,k)
+              Difficult_regions[i] =[k*w_+1, j*h_+1, (k+1)*w_, (j+1)*h_]
+          #print(Difficult_regions) 
        elif cfg.TEST.BBOX_AUG.TRAINED_CROP:
           Difficult_regions = get_trainedCropRegion(filename)
 
@@ -298,13 +314,16 @@ def im_detect_bbox_aug(model, im, box_proposals=None, filename = None):
            i = i + 1
            #print("im shape:",im.shape)
            #print("region_box:",region_box)
+           #scale = min(im_crop.shape[0],im_crop.shape[1]) * 2.3
            if cfg.TEST.BBOX_AUG.TRAINED_CROP:
                #if im_crop.shape[0]/im_crop.shape[1]>4 or im_crop.shape[0]/im_crop.shape[1]<0.25:
                #    continue
-               scale = min(im_crop.shape[0],im_crop.shape[1]) * 1.5
+               scale = min(im_crop.shape[0],im_crop.shape[1]) * 1.7
                scores_scl, boxes_scl = im_detect_bbox_crop(model, im_crop, scale, max_size, box_proposals, region_box)
            else:
-               scores_scl, boxes_scl = im_detect_bbox_crop(model, im_crop, cfg.TEST.SCALE, max_size, box_proposals, region_box)
+               #scale = min(im_crop.shape[0],im_crop.shape[1]) * 1.5
+               #scores_scl, boxes_scl = im_detect_bbox_crop(model, im_crop, cfg.TEST.SCALE, max_size, box_proposals, region_box)
+               scores_scl, boxes_scl = im_detect_bbox_crop(model, im_crop, scale, max_size, box_proposals, region_box)
            #print("boxes_scl:",boxes_scl)
            add_preds_t(scores_scl, boxes_scl)
 
@@ -314,13 +333,13 @@ def im_detect_bbox_aug(model, im, box_proposals=None, filename = None):
         scores_scl, boxes_scl = im_detect_bbox_scale(
             model, im, scale, max_size, box_proposals
         )
-        #add_preds_t(scores_scl, boxes_scl)
+        add_preds_t(scores_scl, boxes_scl)
 
         if cfg.TEST.BBOX_AUG.SCALE_H_FLIP:
             scores_scl_hf, boxes_scl_hf = im_detect_bbox_scale(
                 model, im, scale, max_size, box_proposals, hflip=True
             )
-            #add_preds_t(scores_scl_hf, boxes_scl_hf)
+            add_preds_t(scores_scl_hf, boxes_scl_hf)
 
     # Perform detection at different aspect ratios
     for aspect_ratio in cfg.TEST.BBOX_AUG.ASPECT_RATIOS:
@@ -333,7 +352,7 @@ def im_detect_bbox_aug(model, im, box_proposals=None, filename = None):
             scores_ar_hf, boxes_ar_hf = im_detect_bbox_aspect_ratio(
                 model, im, aspect_ratio, box_proposals, hflip=True
             )
-            #add_preds_t(scores_ar_hf, boxes_ar_hf)
+            add_preds_t(scores_ar_hf, boxes_ar_hf)
 
     # Compute detections for the original image (identity transform) last to
     # ensure that the Caffe2 workspace is populated with blobs corresponding

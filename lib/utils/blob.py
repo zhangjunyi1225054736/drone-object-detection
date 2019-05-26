@@ -110,19 +110,24 @@ def prep_im_for_blob(im, pixel_means, target_sizes, max_size):
     Returns a list of transformed images, one for each target size. Also returns
     the scale factors that were used to compute each returned image.
     """
-    print("im shape:",im.shape)
+    #print("im shape:",im.shape)
     im = im.astype(np.float32, copy=False)
     im -= pixel_means
     im_shape = im.shape
-    im_size_min = np.min(im_shape[0:2])
+    im_size_min = np.min(im_shape[0:2]) 
     im_size_max = np.max(im_shape[0:2])
-    print("min max:",im_size_min,im_size_max)
+    #print("min max:",im_size_min,im_size_max)
     ims = [] 
     im_scales = []
     for target_size in target_sizes:
         im_scale = get_target_scale(im_size_min, im_size_max, target_size, max_size)
+        #im_resized = cv2.resize(im, None, None, fx=im_scale, fy=im_scale,
+                                #interpolation=cv2.INTER_LINEAR)
+        #im_resized = cv2.resize(im, None, None, fx=im_scale, fy=im_scale,
+                                #interpolation=cv2.INTER_CUBIC)
+        
         im_resized = cv2.resize(im, None, None, fx=im_scale, fy=im_scale,
-                                interpolation=cv2.INTER_LINEAR)
+                                interpolation=cv2.INTER_LANCZOS4)
         ims.append(im_resized)
         im_scales.append(im_scale)
     return ims, im_scales
