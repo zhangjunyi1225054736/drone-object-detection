@@ -280,8 +280,8 @@ def im_detect_bbox_aug(model, im, box_proposals=None, filename = None):
           Difficult_regions[2] = [1, int(h/2), int(w/2), h-1]
           Difficult_regions[3] = [int(w/2), int(h/2), w-1, h-1]
           '''
-          w_n = 4
-          h_n = 2
+          w_n = 6
+          h_n = 4
 
           region_n = w_n * h_n
           w_ = int(w / w_n) 
@@ -289,7 +289,7 @@ def im_detect_bbox_aug(model, im, box_proposals=None, filename = None):
 
           Difficult_regions = [[] for i in range(region_n)] 
           for i in range(region_n):
-              j = int(i / h_n)
+              j = int(i / w_n)
               k = i - j*w_n
               print("j,k",j,k)
               Difficult_regions[i] =[k*w_+1, j*h_+1, (k+1)*w_, (j+1)*h_]
@@ -314,16 +314,18 @@ def im_detect_bbox_aug(model, im, box_proposals=None, filename = None):
            i = i + 1
            #print("im shape:",im.shape)
            #print("region_box:",region_box)
-           #scale = min(im_crop.shape[0],im_crop.shape[1]) * 2.3
+           #scale = min(im_crop.shape[0],im_crop.shape[1]) * 2
            if cfg.TEST.BBOX_AUG.TRAINED_CROP:
                #if im_crop.shape[0]/im_crop.shape[1]>4 or im_crop.shape[0]/im_crop.shape[1]<0.25:
                #    continue
-               scale = min(im_crop.shape[0],im_crop.shape[1]) * 1.7
+               #r = round(random.uniform(1.3,2),2)
+               r = 2
+               scale = min(im_crop.shape[0],im_crop.shape[1]) * r
                scores_scl, boxes_scl = im_detect_bbox_crop(model, im_crop, scale, max_size, box_proposals, region_box)
            else:
                #scale = min(im_crop.shape[0],im_crop.shape[1]) * 1.5
-               #scores_scl, boxes_scl = im_detect_bbox_crop(model, im_crop, cfg.TEST.SCALE, max_size, box_proposals, region_box)
-               scores_scl, boxes_scl = im_detect_bbox_crop(model, im_crop, scale, max_size, box_proposals, region_box)
+               scores_scl, boxes_scl = im_detect_bbox_crop(model, im_crop, cfg.TEST.SCALE, max_size, box_proposals, region_box)
+               #scores_scl, boxes_scl = im_detect_bbox_crop(model, im_crop, scale, max_size, box_proposals, region_box)
            #print("boxes_scl:",boxes_scl)
            add_preds_t(scores_scl, boxes_scl)
 

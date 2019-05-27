@@ -45,7 +45,7 @@ def get_image_blob(im, target_scale, target_max_size):
         im_scale (float): image scale (target size) / (original size)
         im_info (ndarray)
     """
-    print("im shape 111:",im.shape)
+    #print("im shape 111:",im.shape)
     processed_im, im_scale = prep_im_for_blob(
         im, cfg.PIXEL_MEANS, [target_scale], target_max_size
     )
@@ -148,7 +148,7 @@ def get_im_blob_sizes(im_shape, target_sizes, max_size):
 def get_target_scale(im_size_min, im_size_max, target_size, max_size):
     """Calculate target resize scale
     """
-    print("target_size / im_size_min:",float(target_size),float(im_size_min))
+    #print("target_size / im_size_min:",float(target_size),float(im_size_min))
     im_scale = float(target_size) / float(im_size_min)
     # Prevent the biggest axis from being more than max_size
     if np.round(im_scale * im_size_max) > max_size:

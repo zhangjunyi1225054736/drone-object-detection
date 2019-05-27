@@ -158,6 +158,7 @@ class Generalized_RCNN(nn.Module):
 
     def _forward(self, data, im_info, roidb=None, **rpn_kwargs):
         im_data = data
+        #print("forward im size:",data.size()) Tensor[b,c,h,w]
         if self.training:
             roidb = list(map(lambda x: blob_utils.deserialize(x)[0], roidb))
 
@@ -302,6 +303,8 @@ class Generalized_RCNN(nn.Module):
                     elif method == 'RoIAlign':
                         xform_out = RoIAlignFunction(
                             resolution, resolution, sc, sampling_ratio)(bl_in, rois)
+                    print("xform_out type", type(xform_out))
+                    print("xform_out size", xform_out.size())
                     bl_out_list.append(xform_out)
 
             # The pooled features from all levels are concatenated along the
