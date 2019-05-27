@@ -301,10 +301,11 @@ class Generalized_RCNN(nn.Module):
                         if cfg.CROP_RESIZE_WITH_MAX_POOL:
                             xform_out = F.max_pool2d(xform_out, 2, 2)
                     elif method == 'RoIAlign':
+                        #print("111",resolution, resolution, sampling_ratio) #(7, 7, 2)
                         xform_out = RoIAlignFunction(
                             resolution, resolution, sc, sampling_ratio)(bl_in, rois)
-                    print("xform_out type", type(xform_out))
-                    print("xform_out size", xform_out.size())
+                    #print("xform_out type", type(xform_out)) #Tensor
+                    #print("xform_out size", xform_out.size()) #torch.Size([462(非定值), 256(定值), 7(定值), 7(定值)])
                     bl_out_list.append(xform_out)
 
             # The pooled features from all levels are concatenated along the
@@ -317,6 +318,7 @@ class Generalized_RCNN(nn.Module):
             restore_bl = Variable(
                 torch.from_numpy(restore_bl.astype('int64', copy=False))).cuda(device_id)
             xform_out = xform_shuffled[restore_bl]
+            #print("xform_out size", xform_out.size()) #[512, 256, 7, 7] 定值
         else:
             # Single feature level
             # rois: holds R regions of interest, each is a 5-tuple
