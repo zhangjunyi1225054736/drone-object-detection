@@ -1,0 +1,130 @@
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_ambulance.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_asparagus.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_baozi.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_barbell.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_binoculars.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_bun.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_chainsaw.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_chips.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_comb.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_crab.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_crosswalk sign.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_dolphin.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_donkey.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_durian.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_eagle.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_electric drill.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_eraser.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_flashlight.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_flute.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_french horn.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_game board.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_green onion.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_hair drier.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_hotair balloon.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_hoverboard.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_iron.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_lighter.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_lion.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_llama.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_lobster.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_mangosteen.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_measuring cup.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_microscope.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_monkey.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_mop.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_noodles.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_okra.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_papaya.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_parrot.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_pasta.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_pencil case.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_pig.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_pitaya.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_poker card.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_polar bear.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_pomelo.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_rabbit.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_race car.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_radish.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_red cabbage.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_rice cooker.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_saw.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_scallop.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_seal.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_shark.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_spring rolls.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_starfish.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_steak.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_sushi.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_table tennis paddle.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_target.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_tuba.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_turtle.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_urinal.txt
+comp4_99c3e8f4-2800-45c8-ab60-af41c62cdc8d_det_test_yak.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_ambulance.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_asparagus.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_baozi.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_barbell.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_binoculars.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_bun.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_chainsaw.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_chips.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_comb.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_crab.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_crosswalk sign.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_dolphin.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_donkey.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_durian.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_eagle.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_electric drill.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_eraser.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_flashlight.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_flute.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_french horn.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_game board.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_green onion.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_hair drier.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_hotair balloon.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_hoverboard.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_iron.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_lighter.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_lion.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_llama.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_lobster.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_mangosteen.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_measuring cup.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_microscope.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_monkey.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_mop.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_noodles.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_okra.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_papaya.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_parrot.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_pasta.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_pencil case.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_pig.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_pitaya.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_poker card.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_polar bear.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_pomelo.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_rabbit.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_race car.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_radish.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_red cabbage.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_rice cooker.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_saw.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_scallop.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_seal.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_shark.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_spring rolls.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_starfish.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_steak.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_sushi.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_table tennis paddle.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_target.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_tuba.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_turtle.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_urinal.txt
+comp4_a41509c0-291a-48ee-ac5c-91a5b72331b6_det_test_yak.txt
