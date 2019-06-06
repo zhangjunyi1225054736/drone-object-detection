@@ -147,7 +147,7 @@ def vis_one_image(
         if score < thresh:
             continue
 
-        print(dataset.classes[classes[i]], score, bbox)
+        #print(dataset.classes[classes[i]], score, bbox)
        
         # show box (off by default, box_alpha=0.0)
         ax.add_patch(

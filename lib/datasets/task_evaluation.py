@@ -59,10 +59,12 @@ def evaluate_all(
         dataset, all_boxes, output_dir, use_matlab=use_matlab
     )
     logger.info('Evaluating bounding boxes is done!')
+    '''
     if cfg.MODEL.MASK_ON:
         results = evaluate_masks(dataset, all_boxes, all_segms, output_dir)
         all_results[dataset.name].update(results[dataset.name])
         logger.info('Evaluating segmentations is done!')
+    '''
     if cfg.MODEL.KEYPOINTS_ON:
         results = evaluate_keypoints(dataset, all_boxes, all_keyps, output_dir)
         all_results[dataset.name].update(results[dataset.name])
@@ -74,7 +76,9 @@ def evaluate_boxes(dataset, all_boxes, output_dir, use_matlab=False):
     """Evaluate bounding box detection."""
     logger.info('Evaluating detections')
     not_comp = not cfg.TEST.COMPETITION_MODE
-    if _use_json_dataset_evaluator(dataset):
+    #if _use_json_dataset_evaluator(dataset):
+    if True:
+        print("use coco eval")
         coco_eval = json_dataset_evaluator.evaluate_boxes(
             dataset, all_boxes, output_dir, use_salt=not_comp, cleanup=not_comp
         )
@@ -86,6 +90,7 @@ def evaluate_boxes(dataset, all_boxes, output_dir, use_matlab=False):
         )
         box_results = _coco_eval_to_box_results(coco_eval)
     elif _use_voc_evaluator(dataset):
+        print("use voc eval")
         # For VOC, always use salt and always cleanup because results are
         # written to the shared VOCdevkit results directory
         voc_eval = voc_dataset_evaluator.evaluate_boxes(

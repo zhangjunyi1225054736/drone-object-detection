@@ -302,6 +302,8 @@ class Generalized_RCNN(nn.Module):
                             xform_out = F.max_pool2d(xform_out, 2, 2)
                     elif method == 'RoIAlign':
                         #print("111",resolution, resolution, sampling_ratio) #(7, 7, 2)
+                        #print("bl_in, rois types", type(bl_in), type(rois)) <class 'torch.Tensor'> <class 'torch.Tensor'>
+                        #print("rois", bl_in.size(), rois) #(1,256,w,h) (n,5)
                         xform_out = RoIAlignFunction(
                             resolution, resolution, sc, sampling_ratio)(bl_in, rois)
                     #print("xform_out type", type(xform_out)) #Tensor

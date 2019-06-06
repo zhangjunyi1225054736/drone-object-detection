@@ -23,6 +23,7 @@ class RoiDataLoader(data.Dataset):
 
     def __getitem__(self, index_tuple):
         index, ratio = index_tuple
+        #print("index:",index)
         single_db = [self._roidb[index]]
         blobs, valid = get_minibatch(single_db)
         #TODO: Check if minibatch is valid ? If not, abandon it.
@@ -34,10 +35,13 @@ class RoiDataLoader(data.Dataset):
                 blobs[key] = blobs[key].squeeze(axis=0)
 
         if self._roidb[index]['need_crop']:
+        #if True:
+            print("need_crop")
             self.crop_data(blobs, ratio)
             # Check bounding box
             entry = blobs['roidb'][0]
             boxes = entry['boxes']
+            print("boxes:", boxes.shape)
             invalid = (boxes[:, 0] == boxes[:, 2]) | (boxes[:, 1] == boxes[:, 3])
             valid_inds = np.nonzero(~ invalid)[0]
             if len(valid_inds) < len(boxes):
@@ -47,6 +51,8 @@ class RoiDataLoader(data.Dataset):
                         entry[key] = entry[key][valid_inds]
                 entry['segms'] = [entry['segms'][ind] for ind in valid_inds]
 
+        else:
+             print("no need_crop")
         blobs['roidb'] = blob_utils.serialize(blobs['roidb'])  # CHECK: maybe we can serialize in collate_fn
 
         return blobs

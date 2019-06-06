@@ -109,7 +109,7 @@ def im_detect_all(model, im,  box_proposals=None, timers=None, filename=None):
         timers['misc_keypoints'].toc()
     else:
         cls_keyps = None
-    print("cls_boxes shape:",cls_boxes)
+    #print("cls_boxes shape:",cls_boxes)
     return cls_boxes, cls_segms, cls_keyps
 
 
@@ -280,8 +280,8 @@ def im_detect_bbox_aug(model, im, box_proposals=None, filename = None):
           Difficult_regions[2] = [1, int(h/2), int(w/2), h-1]
           Difficult_regions[3] = [int(w/2), int(h/2), w-1, h-1]
           '''
-          w_n = 6
-          h_n = 4
+          w_n = 2
+          h_n = 2
 
           region_n = w_n * h_n
           w_ = int(w / w_n) 
@@ -291,15 +291,16 @@ def im_detect_bbox_aug(model, im, box_proposals=None, filename = None):
           for i in range(region_n):
               j = int(i / w_n)
               k = i - j*w_n
-              print("j,k",j,k)
+              #print("j,k",j,k)
               Difficult_regions[i] =[k*w_+1, j*h_+1, (k+1)*w_, (j+1)*h_]
           #print(Difficult_regions) 
        elif cfg.TEST.BBOX_AUG.TRAINED_CROP:
           Difficult_regions = get_trainedCropRegion(filename)
+          Difficult_regions = get_final_regions(w,h,Difficult_regions)
 
        i = 0
        max_size = cfg.TEST.BBOX_AUG.MAX_SIZE
-
+       f_crop_list = open("random_crop_list.txt",'a')
        for region_box in Difficult_regions:
            #for j in range(4):
                #region_box[i] = int(region_box[i])
@@ -307,25 +308,31 @@ def im_detect_bbox_aug(model, im, box_proposals=None, filename = None):
            y2 = int(region_box[3]) 
            x1 = int(region_box[0])
            x2 = int(region_box[2])
+           w = x2 - x1
+           h = y2 - y1
+           s_ = filename.split(".")[0]+'_'+str(i) + "," +str(x1) + "," + str(y1) + "," + str(x2) + "," + str(y2) + "," + str(w) + ","+ str(h) + "," + str(round(w/h,2))
+           f_crop_list.write(s_+'\n')
+           #if (w / h > 1.7) or (h / w  > 1.7):
+              #continue  
            im_crop = im[y1:y2, x1:x2] #crop the image
            #if(region_box[1]<0):
-           cv2.imwrite("./crop/"+str(i)+'_'+filename, im_crop)
+           #cv2.imwrite("./crop/"+str(i)+'_'+filename, im_crop)
               # cv2.imwrite("./crop/or"+str(i)+".jpg", im)
            i = i + 1
            #print("im shape:",im.shape)
            #print("region_box:",region_box)
-           #scale = min(im_crop.shape[0],im_crop.shape[1]) * 2
+           scale = min(im_crop.shape[0],im_crop.shape[1]) * 1.5
            if cfg.TEST.BBOX_AUG.TRAINED_CROP:
                #if im_crop.shape[0]/im_crop.shape[1]>4 or im_crop.shape[0]/im_crop.shape[1]<0.25:
                #    continue
                #r = round(random.uniform(1.3,2),2)
-               r = 2
+               r = 1.3
                scale = min(im_crop.shape[0],im_crop.shape[1]) * r
                scores_scl, boxes_scl = im_detect_bbox_crop(model, im_crop, scale, max_size, box_proposals, region_box)
            else:
                #scale = min(im_crop.shape[0],im_crop.shape[1]) * 1.5
-               scores_scl, boxes_scl = im_detect_bbox_crop(model, im_crop, cfg.TEST.SCALE, max_size, box_proposals, region_box)
-               #scores_scl, boxes_scl = im_detect_bbox_crop(model, im_crop, scale, max_size, box_proposals, region_box)
+               #scores_scl, boxes_scl = im_detect_bbox_crop(model, im_crop, cfg.TEST.SCALE, max_size, box_proposals, region_box)
+               scores_scl, boxes_scl = im_detect_bbox_crop(model, im_crop, scale, max_size, box_proposals, region_box)
            #print("boxes_scl:",boxes_scl)
            add_preds_t(scores_scl, boxes_scl)
 
@@ -397,8 +404,8 @@ def get_randomCropRegion(width,height,crop_number=4):
     while 1:
         if count >= crop_number:
            break
-        w = random.uniform(0.9 * width, width)
-        h = random.uniform(0.2 * height, 0.25*height)
+        w = random.uniform(0.7 * width, width)
+        h = random.uniform(0.7 * height, height)
         #w = width - 10
         #h = height - 10
         if h / w < 0.5 or h / w > 2:
@@ -418,6 +425,117 @@ def get_trainedCropRegion(filename):
     name = data['img_name']
     region_box = bbox[name.index(filename)]
     return region_box
+
+
+def get_final_regions(W, H, Difficult_regions):
+
+    regions = Difficult_regions.copy()
+    #print(regions)
+
+    for i, bbox in enumerate(Difficult_regions):
+        x1,y1,x2,y2 = bbox
+        w = x2 - x1
+        h = y2 - y1
+        if (h / w) < 0.5:
+           del regions[i]
+           m_x = int((x1 + x2) / 2)
+           box1 = [x1,y1,m_x,y2]
+           box2 = [m_x,y1,x2,y2]
+           regions.append(box1)
+           regions.append(box2)
+        elif (h / w) > 2: 
+           del regions[i]
+           m_y = int((y1 + y2) / 2)
+           box1 = [x1,y1,x2,m_y]
+           box2 = [x1,m_y,x2,y2]
+           regions.append(box1)
+           regions.append(box2)
+        else:
+           pass
+    regions = np.array(regions)
+    #print(regions)
+    center_x = (regions[:,0]+regions[:,2])/2
+    center_y = (regions[:,1]+regions[:,3])/2
+    center = np.hstack((np.array([center_x]).T,np.array([center_y]).T))
+    #print("center:", center)
+    w_ = 0.6*W
+    h_ = 0.6*H
+
+    for i, bbox in enumerate(regions):
+
+        x1,y1,x2,y2 = bbox
+        w = x2 - x1
+        h = y2 - y1
+
+        #center_x,center_y = center[i]
+        #center_x = int(center_x)
+        #center_y = int(center_y)
+        #min_y = min(center_y, Y-center_y) 
+        #print("w,h",w,h)
+        #print("w_,h_",w_,h_)
+        if w >= w_ and h < h_:
+           add_y = int((h_ - h) / 2)
+           y1_new = y1 - add_y
+           y2_new = y2 + add_y
+           
+           if y1_new < 0 :
+              y1_new = 0
+           if y2_new > H :
+              y2_new = H-1
+
+           regions[i][1] = y1_new
+           regions[i][3] = y2_new
+           
+
+        elif w < w_ and h >= h_:
+           add_x = int((w_ - w) / 2)
+           x1_new = x1 - add_x
+           x2_new = x2 + add_x
+           
+           if x1_new < 0 :
+              x1_new = 0
+           if x2_new > W:
+              x2_new = W-1
+
+           regions[i][0] = x1_new
+           regions[i][2] = x2_new
+
+        elif w < w_ and h < h_:
+           #print("x1,y1,x2,y2:",x1,y1,x2,y2) 
+           add_y = int((h_ - h) / 2)
+           #print("add_y:",add_y)
+           y1_new = y1 - add_y
+           y2_new = y2 + add_y
+           
+           if y1_new < 0 :
+              y1_new = 0
+           if y2_new > H:
+              y2_new = H-1
+           
+           add_x = int((w_ - w) / 2)
+           #print("add_x:",add_x)
+           x1_new = x1 - add_x
+           x2_new = x2 + add_x
+           
+           if x1_new < 0 :
+              x1_new = 0
+           if x2_new > W:
+              x2_new = W-1
+           regions[i][1] = y1_new
+           regions[i][3] = y2_new
+
+           regions[i][0] = x1_new
+           regions[i][2] = x2_new
+        else:
+           pass
+        #print("regions [i]:", regions[i])
+           #center_x,center_y = center[i]
+           
+    #print(len(regions)) 
+    #print(regions)
+    #exit()
+    return regions
+
 
 def im_detect_bbox_hflip(
         model, im, target_scale, target_max_size, box_proposals=None,region_box=None):
@@ -1071,7 +1189,8 @@ def _get_blobs(im, rois, target_scale, target_max_size):
     #print("im shape:",im.shape)
     blobs = {}
     blobs['data'], im_scale, blobs['im_info'] = \
-        blob_utils.get_image_blob(im, target_scale, target_max_size)
+            blob_utils.get_image_blob(im, target_scale, target_max_size)
     if rois is not None:
         blobs['rois'] = _get_rois_blob(rois, im_scale)
     return blobs, im_scale
+                          

@@ -134,7 +134,8 @@ def evaluate_boxes(
     res_file += '.json'
     _write_coco_bbox_results_file(json_dataset, all_boxes, res_file)
     # Only do evaluation on non-test sets (annotations are undisclosed on test)
-    if json_dataset.name.find('test') == -1:
+    #if json_dataset.name.find('test') == -1:
+    if True:
         coco_eval = _do_detection_eval(json_dataset, res_file, output_dir)
     else:
         coco_eval = None
@@ -151,7 +152,7 @@ def _write_coco_bbox_results_file(json_dataset, all_boxes, res_file):
     #   "score": 0.236}, ...]
     results = []
     for cls_ind, cls in enumerate(json_dataset.classes):
-        if cls == '__background__':
+        if cls == '__background__' or cls =='ignored_regions' or cls == 'others':
             continue
         if cls_ind >= len(all_boxes):
             break
@@ -215,14 +216,15 @@ def _log_detection_eval_metrics(json_dataset, coco_eval):
     # precision has dims (iou, recall, cls, area range, max dets)
     # area range index 0: all area ranges
     # max dets index 2: 100 per image
-    precision = coco_eval.eval['precision'][ind_lo:(ind_hi + 1), :, :, 0, 2]
+    precision = coco_eval.eval['precision'][ind_lo:(ind_hi + 1), :,1:11, 0, 2]
+    #print("precision:",precision)
     ap_default = np.mean(precision[precision > -1])
     logger.info(
         '~~~~ Mean and per-category AP @ IoU=[{:.2f},{:.2f}] ~~~~'.format(
             IoU_lo_thresh, IoU_hi_thresh))
     logger.info('{:.1f}'.format(100 * ap_default))
     for cls_ind, cls in enumerate(json_dataset.classes):
-        if cls == '__background__':
+        if cls == '__background__' or cls == 'ignored_regions' or cls == 'others':
             continue
         # minus 1 because of __background__
         precision = coco_eval.eval['precision'][
